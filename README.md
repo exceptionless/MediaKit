@@ -1,4 +1,4 @@
 # MediaKit
-[![Gitter](https://img.shields.io/badge/gitter-join_chat-brightgreen.svg)](https://gitter.im/exceptionless/Discuss) 
+[![Slack Status](https://slack.exceptionless.com/badge.svg)](https://slack.exceptionless.com) 
 
 Media Kit for the Exceptionless project
