@@ -1,5 +1,3 @@
-# Building Scalable Applications With Foundatio
-
 ## Overview
 
 When we began building Exceptionless, an open source error and event reporting service, 
