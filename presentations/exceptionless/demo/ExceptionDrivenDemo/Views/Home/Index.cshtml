@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div id="body">
+    <h2>Actions</h2>
+    @using (Html.BeginForm("AddItemToOrder", "Home", FormMethod.Post)) {
+        @Html.Hidden("productId", "&#134")
+        <input type="submit" class="btn btn-primary" value="Add Car To Cart" />
+    }
+    @using (Html.BeginForm("AddItemToOrder", "Home", FormMethod.Post)) {
+        @Html.Hidden("productId", "1")
+        <input type="submit" class="btn btn-primary" value="Add Truck To Cart" />
+    }
+
+    <label for="number">Id:</label>
+    <input type="number" id="number" />
+    <button type="button" class="btn" onclick="getValue(document.getElementById('number').value)">Get Result for Id</button>
+    <h4>Result</h4>
+    <textarea id="result" rows="5" cols="80" readonly></textarea>
+</div>
+
+<script type="text/javascript">
+    function getValue(index) {
+        $.get('api/values/' + index, function (data) {
+            $('#result').text(data);
+        }).fail(function (response) {
+            var json = response.responseJSON;
+            $('#result').text(json.ExceptionMessage + '\r\n' + json.StackTrace);
+            throw new Error(json.ExceptionMessage);
+        });
+    }
+
+    throw new Error('TODO: implement setting the user');
+</script>

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/Site.css" />
+</head>
+<body>
+	<header>
+		<div class="content-wrapper">
+			<div class="float-left">
+				<p class="site-title">
+					<a href="~/">Exception Driven Demo</a></p>
+			</div>
+			<div class="float-right">
+				<nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    </ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	@RenderBody()
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.rawgit.com/exceptionless/Exceptionless.JavaScript/v1.3.2/dist/exceptionless.min.js?apiKey=API_KEY_HERE"></script>
+</body>
+</html>
