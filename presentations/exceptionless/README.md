@@ -1,11 +1,11 @@
 # Exception Driven Development
 
 ## Overview
-If customer facing issues are your top priority, then you already adhere to the primary principle 
+What is "Exception Driven Development"? If customer-facing issues are your top priority, then you already adhere to the primary principle 
 of Exception Driven Development.
 
 It's a pretty simple concept: Collect application data, especially regarding errors and crashes, 
-and then focus on fixing those problems that your users are actually experiencing.
+and then focus on fixing those problems that your users are actually experiencing. Join me for 60 minutes and I'll walk you through what you're doing wrong with your current log collection approach, and how you should be doing it. Additionally, we'll cover visualizing errors in a more meaningful manner that eliminates all the noise.
 
 ## Slides
 The power point slides can be found [here](slides.pptx).
