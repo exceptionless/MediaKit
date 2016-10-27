@@ -1,42 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using NLog;
+using NLog.Fluent;
 
 namespace ExceptionDrivenDemo.Controllers {
     public class HomeController : Controller {
-        private readonly Logger _logger = LogManager.GetLogger("HomeController");
-
         public ActionResult Index() {
+            Log.Trace().Message("Loading view").Write();
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddItemToOrder(int? productId) {
+        public async Task<ActionResult> AddItemToOrderAsync(int? productId) {
             if (!productId.HasValue || productId <= 0) {
-                _logger.Log(LogLevel.Error, "Invalid ProductId");
-                throw new ArgumentException("Invalid ProductId", "productId");
+                Log.Error().Message("Invalid ProductId").Write();
+                throw new ArgumentException("Invalid ProductId", nameof(productId));
             }
 
-            _logger.Log(LogLevel.Info, "Creating Order");
+            Log.Info().Message("Creating Order").Write();
             var order = new Order();
 
-            var item = new Item {
+            var item = await GetProductLineItemAsync(productId.Value);
+            Log.Info().Message("Adding item with to order.").Property("Product", item).Write();
+            order.LineItems.Add(item);
+
+            Log.Info().Message("Calculating Total Price.").Write();
+            order.CalculateTotalPrice();
+
+            Log.Info().Message("Calculated Total Price.").Write();
+            return View();
+        }
+
+        private static Task<Item> GetProductLineItemAsync(int productId) {
+            return Task.FromResult(new Item {
                 Name = "Sample",
                 Price = 9.99,
                 Quantity = 1,
-                ProductId = productId.Value
-            };
-
-            _logger.Log(LogLevel.Info, String.Format("Adding item with to order. ProductId: {0}, Quantity: {1}", item.ProductId, item.Quantity));
-            order.LineItems.Add(item);
-
-            _logger.Log(LogLevel.Info, "Calculating Total Price.");
-            order.CalculateTotalPrice();
-
-            _logger.Log(LogLevel.Info, "Calculated Total Price.");
-
-            return View();
+                ProductId = productId
+            });
         }
     }
 
@@ -50,8 +53,13 @@ namespace ExceptionDrivenDemo.Controllers {
 
         public List<Item> LineItems { get; set; }
 
+        public double Price { get; set; }
+
+        public double SalesTax { get; set; }
+
         public void CalculateTotalPrice() {
-            throw new Exception(Guid.NewGuid().ToString());
+            Price = LineItems.Sum(i => i.Price * i.Quantity);
+            SalesTax = Price / 0;
         }
     }
 

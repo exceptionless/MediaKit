@@ -5,11 +5,11 @@
 
 <div id="body">
     <h2>Actions</h2>
-    @using (Html.BeginForm("AddItemToOrder", "Home", FormMethod.Post)) {
+    @using (Html.BeginForm("AddItemToOrderAsync", "Home", FormMethod.Post)) {
         @Html.Hidden("productId", "&#134")
         <input type="submit" class="btn btn-primary" value="Add Car To Cart" />
     }
-    @using (Html.BeginForm("AddItemToOrder", "Home", FormMethod.Post)) {
+    @using (Html.BeginForm("AddItemToOrderAsync", "Home", FormMethod.Post)) {
         @Html.Hidden("productId", "1")
         <input type="submit" class="btn btn-primary" value="Add Truck To Cart" />
     }

@@ -8,26 +8,30 @@
     <link type="text/css" rel="stylesheet" href="~/Content/Site.css" />
 </head>
 <body>
-	<header>
-		<div class="content-wrapper">
-			<div class="float-left">
-				<p class="site-title">
-					<a href="~/">Exception Driven Demo</a></p>
-			</div>
-			<div class="float-right">
-				<nav>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    <a href="~/">Exception Driven Demo</a>
+                </p>
+            </div>
+            <div class="float-right">
+                <nav>
                     <ul id="menu">
                         <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                     </ul>
-				</nav>
-			</div>
-		</div>
-	</header>
-	@RenderBody()
+                </nav>
+            </div>
+        </div>
+    </header>
+    @RenderBody()
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.rawgit.com/exceptionless/Exceptionless.JavaScript/v1.3.2/dist/exceptionless.min.js?apiKey=API_KEY_HERE"></script>
+    <script src="https://cdn.rawgit.com/exceptionless/Exceptionless.JavaScript/v1.4.1/dist/exceptionless.min.js?apiKey=API_KEY_HERE"></script>
+    <script type="text/javascript">
+        exceptionless.ExceptionlessClient.default.config.setUserIdentity('123456789', 'Blake');
+    </script>
 </body>
 </html>
