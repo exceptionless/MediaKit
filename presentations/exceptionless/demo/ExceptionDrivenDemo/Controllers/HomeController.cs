@@ -13,7 +13,7 @@ namespace ExceptionDrivenDemo.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddItemToOrderAsync(int? productId) {
+        public async Task<ActionResult> AddItemToOrder(int? productId) {
             if (!productId.HasValue || productId <= 0) {
                 Log.Error().Message("Invalid ProductId").Write();
                 throw new ArgumentException("Invalid ProductId", nameof(productId));
