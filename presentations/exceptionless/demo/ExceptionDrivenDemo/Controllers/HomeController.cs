@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using NLog.Fluent;
 
 namespace ExceptionDrivenDemo.Controllers {
@@ -30,16 +31,33 @@ namespace ExceptionDrivenDemo.Controllers {
             order.CalculateTotalPrice();
 
             Log.Info().Message("Calculated Total Price.").Write();
-            return View();
+            return View(order);
         }
 
         private static Task<Item> GetProductLineItemAsync(int productId) {
-            return Task.FromResult(new Item {
-                Name = "Sample",
-                Price = 9.99,
-                Quantity = 1,
-                ProductId = productId
-            });
+            Item item;
+            switch (productId) {
+                case 1:
+                    item = new Item {
+                        Name = "Car",
+                        Price = 9.99,
+                        Quantity = 1,
+                        ProductId = productId
+                    };
+                    break;
+                case 2:
+                    item = new Item {
+                        Name = "Truck",
+                        Price = 9.99,
+                        Quantity = 1,
+                        ProductId = productId
+                    };
+                    break;
+                default:
+                    throw new Exception($"Product not found: {productId}");
+            }
+
+            return Task.FromResult(item);
         }
     }
 
@@ -55,11 +73,15 @@ namespace ExceptionDrivenDemo.Controllers {
 
         public double Price { get; set; }
 
-        public double SalesTax { get; set; }
+        public double SalesTax { get; set;  }
 
         public void CalculateTotalPrice() {
             Price = LineItems.Sum(i => i.Price * i.Quantity);
-            SalesTax = Price / 0;
+            SalesTax = Price * GetSalesTax();
+        }
+
+        private double GetSalesTax() {
+            throw new NotImplementedException();
         }
     }
 
