@@ -24,7 +24,7 @@ namespace ExceptionDrivenDemo.Controllers {
             var order = new Order();
 
             var item = await GetProductLineItemAsync(productId.Value);
-            Log.Info().Message("Adding item with to order.").Property("Product", item).Write();
+            Log.Info().Message("Adding item to order.").Write();
             order.LineItems.Add(item);
 
             Log.Info().Message("Calculating Total Price.").Write();
