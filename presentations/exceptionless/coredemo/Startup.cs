@@ -48,7 +48,7 @@ namespace coredemo
         app.UseExceptionHandler("/Home/Error");
       }
 
-      app.UseExceptionless("0ZTxvmEKtTTW6SeNaIBnWXL7PxEAiVNYxjoN6vPb");
+      app.UseExceptionless("API_KEY_HERE");
       ExceptionlessClient.Default.Configuration.SetUserIdentity("123456789", "eric@exceptionless.com");
 
       app.UseStaticFiles();

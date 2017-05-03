@@ -68,7 +68,7 @@ namespace coredemo.Controllers
     {
       if (!productId.HasValue || productId <= 0)
       {
-        _logger.Error().Message("Invalid ProductId");
+        _logger.Error().Message("Invalid ProductId").Write();
         throw new ArgumentException("Invalid ProductId", nameof(productId));
       }
 
