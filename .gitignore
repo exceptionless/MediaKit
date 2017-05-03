@@ -116,3 +116,4 @@ App_Data
 *.DS_Store
 *.orig
 *.nugetreferenceswitcher
+presentations/exceptionless/coredemo/wwwroot/lib/
