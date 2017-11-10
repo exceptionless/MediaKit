@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
-using NLog.Fluent;
 using Exceptionless;
+using Microsoft.Extensions.Logging;
 
 namespace coredemo.Controllers
 {
   public class HomeController : Controller
   {
-    private readonly Logger _logger = LogManager.GetLogger("HomeController");
+    private readonly ILogger _logger;
+    public HomeController(ILogger<HomeController> logger)
+    {
+      _logger = logger;
+    }
 
     public IActionResult Index()
     {
@@ -44,7 +47,7 @@ namespace coredemo.Controllers
 
     public IActionResult Contact()
     {
-      _logger.Trace().Message($"GET /Home/Contact").Write();
+      _logger.LogTrace("GET /Home/Contact");
 
       ViewData["Message"] = "Your contact page.";
 
@@ -68,22 +71,30 @@ namespace coredemo.Controllers
     {
       if (!productId.HasValue || productId <= 0)
       {
-        _logger.Error().Message("Invalid ProductId").Write();
+        _logger.LogError("Invalid ProductId");
         throw new ArgumentException("Invalid ProductId", nameof(productId));
       }
 
-      _logger.Info().Message("Creating Order").Write();
+      _logger.LogInformation("Creating Order");
       var order = new Order();
 
-      var item = await GetProductLineItemAsync(productId.Value);
-      _logger.Info().Message("Adding item to order.").Write();
-      order.LineItems.Add(item);
+      try
+      {
+        var item = await GetProductLineItemAsync(productId.Value);
+        _logger.LogInformation("Adding item to {Order}.", order);
+        order.LineItems.Add(item);
 
-      _logger.Info().Message("Calculating Total Price.").Write();
-      order.CalculateTotalPrice();
+        _logger.LogInformation("Calculating Total Price for {Order}.", order);
+        order.CalculateTotalPrice();
 
-      _logger.Info().Message("Calculated Total Price.").Write();
-      return View(order);
+        _logger.LogInformation("Calculated Total Price for {Order}.", order);
+        return View(order);
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError(ex, "Error processing order for {Order}.", order);
+        throw;
+      }
     }
 
     private static Task<Item> GetProductLineItemAsync(int productId)
@@ -155,5 +166,4 @@ namespace coredemo.Controllers
     public int Quantity { get; set; }
     public double Price { get; set; }
   }
-
 }
