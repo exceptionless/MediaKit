@@ -66,16 +66,16 @@ namespace coredemo.Controllers {
 
             try {
                 var item = await GetProductLineItemAsync(productId.Value);
-                _logger.LogInformation("Adding item to {Order}.", order.Id);
+                _logger.LogInformation("Adding item to {OrderId}.", order.Id);
                 order.LineItems.Add(item);
 
-                _logger.LogInformation("Calculating Total Price for {Order}.", order.Id);
+                _logger.LogInformation("Calculating Total Price for {OrderId}.", order.Id);
                 order.CalculateTotalPrice();
 
-                _logger.LogInformation("Calculated Total Price for {Order}.", order.Id);
+                _logger.LogInformation("Calculated Total Price for {OrderId}.", order.Id);
                 return View(order);
             } catch (Exception ex) {
-                _logger.LogError(ex, "Error processing order for {Order}.", order.Id);
+                _logger.LogError(ex, "Error processing order for {OrderId}.", order.Id);
                 throw;
             }
         }
