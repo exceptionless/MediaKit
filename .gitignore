@@ -117,3 +117,5 @@ App_Data
 *.orig
 *.nugetreferenceswitcher
 presentations/exceptionless/coredemo/wwwroot/lib/
+
+presentations/exceptionless/coredemo/log\.txt
