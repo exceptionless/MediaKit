@@ -26,6 +26,7 @@ namespace coredemo {
                 app.UseExceptionHandler("/Home/Error");
 
             app.UseExceptionless("OLOwYKyeabCfb64TTV3WguQlBP0wkUvvzqqXGbnv");
+            ExceptionlessClient.Default.Configuration.UseFolderStorage("|DataDirectory|settings");
             ExceptionlessClient.Default.Configuration.SetUserIdentity("123456789", "eric@exceptionless.com");
 
             app.UseStaticFiles();

@@ -66,16 +66,16 @@ namespace coredemo.Controllers {
 
             try {
                 var item = await GetProductLineItemAsync(productId.Value);
-                _logger.LogInformation("Adding item to {Order}.", order);
+                _logger.LogInformation("Adding item to {Order}.", order.Id);
                 order.LineItems.Add(item);
 
-                _logger.LogInformation("Calculating Total Price for {Order}.", order);
+                _logger.LogInformation("Calculating Total Price for {Order}.", order.Id);
                 order.CalculateTotalPrice();
 
-                _logger.LogInformation("Calculated Total Price for {Order}.", order);
+                _logger.LogInformation("Calculated Total Price for {Order}.", order.Id);
                 return View(order);
             } catch (Exception ex) {
-                _logger.LogError(ex, "Error processing order for {Order}.", order);
+                _logger.LogError(ex, "Error processing order for {Order}.", order.Id);
                 throw;
             }
         }
@@ -110,9 +110,12 @@ namespace coredemo.Controllers {
 
     public class Order {
         public Order() {
+            Id = Guid.NewGuid().ToString("N").Substring(8);
             CreatedDate = DateTime.Now;
             LineItems = new List<Item>();
         }
+
+        public string Id { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
