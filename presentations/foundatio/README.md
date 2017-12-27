@@ -15,7 +15,7 @@ how we built and scaled Exceptionless, and how you can use Foundatio to improve 
 The power point slides can be found [here](slides.pptx).
 
 ## Demos
-The code for the demos can be found [here](https://github.com/exceptionless/Foundatio.Samples).
+The code for the demos can be found [here](https://github.com/FoundatioFx/Foundatio.Samples).
 
 ## Questions?
 Please join us on [![Slack](https://slack.exceptionless.com/badge.svg)](https://slack.exceptionless.com) if you have any questions.
